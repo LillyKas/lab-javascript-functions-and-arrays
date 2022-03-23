@@ -6,8 +6,6 @@ function maxOfTwoNumbers(num1, num2) {
   } else {
     return num2;
   }
-
-  return;
 }
 
 maxOfTwoNumbers(1, 3);
@@ -68,7 +66,7 @@ function sum(input) {
     } else if (typeof input[i] == 'number' || typeof input[i] == 'boolean') {
       sum += input[i];
     } else {
-      throw "Unsupported data type sir or ma'am";
+      throw new Error("Unsupported data type sir or ma'am");
     }
   }
 
@@ -94,6 +92,8 @@ function averageNumbers(numbersAvg) {
 
     average = sum / numbersAvg.length;
   }
+
+  //alternative  = sumNumbers(numbers)/ numbers.length
   return average;
 }
 
@@ -143,7 +143,7 @@ function avg(input) {
     }
 
     average = sum / input.length;
-    average = Math.round(average * 100) / 100
+    average = Math.round(average * 100) / 100; //Alternative average.toFixed(2) --> returns String to number_-> Number(average.toFixed(2))
   }
 
   return average;
@@ -175,6 +175,7 @@ function uniquifyArray(wordsUnique) {
 
   for (let i = 0; i < wordsUnique.length; i++) {
     if (singleWords.includes(wordsUnique[i]) == false) {
+      // Alternative: !(singleWords.includes(wordsUnique[i])
       singleWords.push(wordsUnique[i]);
     }
   }
@@ -230,7 +231,7 @@ function howManyTimes(arr, wor) {
       count++;
     }
   }
-  console.log(count);
+  
   return count;
 }
 
@@ -260,29 +261,20 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct() {
-//add every number horizontally 
-
-let productHor = 0;
-let highestSumHor = 0;
-
-for(let i =0; i < matrix.length; i++){
-  for (let j = 0; j < arr[i].length; j++)
-
-  if(matrix[i][j] == matrix[i][j-1]) {
-    
+  function greatestProduct(matrix) {
+    let highestProduct = 0;
+    let productHor = 0;
+    let productVer = 0;
+    for (let j = 0; j < 20; j++) {
+      for (let i = 0; i < 17; i++) {
+        productHor = matrix[j][i] * matrix[j][i + 1] * matrix[j][i + 2] * matrix[j][i + 3];
+        productVer = matrix[i][j] * matrix[i + 1][j] * matrix[i + 2][j] * matrix[i + 3][j];
+        highestProduct = Math.max(productHor, productVer, highestProduct);
+      }
+    }
+    return highestProduct;
   }
-    productHor = matrix[i][j] * matrix[i][j+1]
-
-
-}
-
-
-//add first number, second number of each iteration 
-
-
-
-}
+  greatestProduct(matrix)
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
